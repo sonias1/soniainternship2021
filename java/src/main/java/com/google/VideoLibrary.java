@@ -42,8 +42,19 @@ class VideoLibrary {
     }
   }
 
-  List<Video> getVideos() {
-    return new ArrayList<>(this.videos.values());
+  List<String> getVideos() {
+    ArrayList<String> T= new ArrayList<>();
+    for (Video v : this.videos.values()) {
+      String a = new String(v.getTitle());
+      String b = new String(v.getVideoId());
+      String c = new String(String.valueOf(v.getTags()));
+      String video = a+ " " + "("+b+")"+" "+ c;
+      video = video.replaceAll(",","");
+
+      T.add(video);
+    }
+    // return new ArrayList<>(this.videos.values());
+    return T ;
   }
 
   /**
@@ -51,5 +62,9 @@ class VideoLibrary {
    */
   Video getVideo(String videoId) {
     return this.videos.get(videoId);
+  }
+
+  public boolean containsVideo(String videoId) {
+      return this.videos.containsKey(videoId);
   }
 }
